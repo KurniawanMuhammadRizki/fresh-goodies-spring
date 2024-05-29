@@ -31,7 +31,7 @@ public class ProductController {
         if (productFound.isEmpty()){
             return Response.failedResponse(HttpStatus.NOT_FOUND.value(), "Product not found");
         }
-        return Response.successfulResponse("Product detail found");
+        return Response.successfulResponse("Product detail found", productFound);
     }
 
     @PutMapping
