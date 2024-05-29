@@ -1,19 +1,17 @@
 package com.fresh_goodies_spring.fresh_goodies_spring.Products.Service;
 
 import com.fresh_goodies_spring.fresh_goodies_spring.Products.model.Product;
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Getter
 @Service
 public class ProductService {
     List<Product> products = new ArrayList<>();
-
-    public List<Product> getProducts(){
-        return products;
-    }
 
     public Optional<Product> getProduct(long id){
         return products.stream().filter(product -> product.getId() == id).findFirst();
