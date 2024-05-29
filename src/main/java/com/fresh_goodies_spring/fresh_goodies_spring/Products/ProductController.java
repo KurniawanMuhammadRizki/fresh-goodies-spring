@@ -22,25 +22,37 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<Response<List<Product>>> getProducts(){
-        return Response.successfulResponse("All product fetched"); //ini belom
+        return Response.successfulResponse("All product fetched", productService.getProducts());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Response<Optional<Product>>> getProduct(@PathVariable long id){
-        //ini belom
+        var productFound = productService.getProduct(id);
+        if (productFound.isEmpty()){
+            return Response.failedResponse(HttpStatus.NOT_FOUND.value(), "Product not found");
+        }
         return Response.successfulResponse("Product detail found");
     }
 
     @PutMapping
     public ResponseEntity<Response<Product>> updateProduct(@RequestBody Product product){
-        // ini belom
-        return Response.successfulResponse("Update product success");
+        return Response.successfulResponse("Update product success", productService.updateProduct(product));
     }
 
     @PostMapping
     public ResponseEntity<Response<Product>> createProduct(@Validated @RequestBody Product product){
-        //ini belom
+        var createdProduct = productService.addProduct(product);
         return Response.successfulResponse(HttpStatus.CREATED.value(), "New product created", product);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Response<Product>> deleteProduct(@PathVariable long id){
+        Product deletedProduct = productService.deleteProduct(id);
+        if (deletedProduct != null) {
+            return Response.successfulResponse("Product deleted successfully", deletedProduct);
+        } else {
+            return Response.failedResponse(HttpStatus.NOT_FOUND.value(), "Product not found");
+        }
     }
 
 }
