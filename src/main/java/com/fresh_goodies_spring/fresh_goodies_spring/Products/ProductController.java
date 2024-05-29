@@ -49,7 +49,7 @@ public class ProductController {
     public ResponseEntity<Response<Boolean>> deleteProduct(@PathVariable long id){
         boolean deletedProduct = productService.deleteProduct(id);
         if (deletedProduct) {
-            return Response.successfulResponse("Product deleted successfully", deletedProduct);
+            return Response.successfulResponse("Product deleted successfully");
         } else {
             return Response.failedResponse(HttpStatus.NOT_FOUND.value(), "Product not found");
         }

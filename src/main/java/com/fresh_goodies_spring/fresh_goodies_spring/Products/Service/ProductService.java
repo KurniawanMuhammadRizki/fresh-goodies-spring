@@ -18,10 +18,8 @@ public class ProductService {
     }
 
     public Product addProduct(Product product){
-        boolean exists = products.stream().anyMatch(p -> p.getId() == product.getId());
-        if(exists){
-            //ini belom
-        }
+        long newId = products.stream().mapToLong(Product::getId).max().orElse(0L) + 1;
+        product.setId(newId);
         products.add(product);
         return product;
     }
