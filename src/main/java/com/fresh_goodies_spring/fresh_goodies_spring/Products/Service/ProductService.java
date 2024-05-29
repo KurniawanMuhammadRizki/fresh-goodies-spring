@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Getter
@@ -24,18 +25,21 @@ public class ProductService {
         return product;
     }
 
-    public Product updateProduct(Product product){
-        Product currentProduct = products.stream().filter(p -> p.getId() == product.getId()).findFirst().orElse(null);
+    public Product updateProduct(Product product) {
+        Optional<Product> currentProductOpt = products.stream().filter(p -> p.getId() == product.getId()).findFirst();
 
-        if(currentProduct != null){
+        if (currentProductOpt.isPresent()) {
+            Product currentProduct = currentProductOpt.get();
             currentProduct.setName(product.getName());
             currentProduct.setCategory(product.getCategory());
             currentProduct.setImageUrl(product.getImageUrl());
             currentProduct.setPrice(product.getPrice());
             currentProduct.setWeight(product.getWeight());
             currentProduct.setMetadata(product.getMetadata());
+            return currentProduct;
+        } else {
+            throw new NoSuchElementException("Product with ID " + product.getId() + " not found");
         }
-        return currentProduct;
     }
 
     public Boolean deleteProduct(Long id){
