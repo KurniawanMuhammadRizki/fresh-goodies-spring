@@ -82,7 +82,14 @@ public class CartService {
     }
 
 
-//    public Boolean deleteCartItem(Long id){
-//
-//    }
+    public Boolean deleteCartItem(Long id) {
+        List<CartItem> cartItems = getCart(id);
+        if (!cartItems.isEmpty()) {
+            carts.removeAll(cartItems);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
