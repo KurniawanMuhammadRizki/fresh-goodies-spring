@@ -42,12 +42,13 @@ public class ProductService {
         return currentProduct;
     }
 
-    public void deteleProduct(Long id){
+    public Boolean deleteProduct(Long id){
         Optional<Product> productOptional = getProduct(id);
         if (productOptional.isPresent()) {
             products.remove(productOptional.get());
+            return true;
         } else {
-           //ini belom
+         return false;
         }
     }
 }
