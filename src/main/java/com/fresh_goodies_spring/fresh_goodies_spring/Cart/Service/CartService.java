@@ -35,19 +35,6 @@ public class CartService {
         return result;
     }
 
-//    public CartItem addToCart(CartItem cartItem){
-//        Optional<Product> productExist = productService.getProduct(cartItem.getProductId());
-//        if(productExist.isPresent()) {
-//
-//            long newId = carts.stream().mapToLong(CartItem::getId).max().orElse(0L) + 1;
-//            cartItem.setId(newId);
-//            carts.add(cartItem);
-//            return cartItem;
-//        } else {
-//            throw new ApplicationException("Product with ID " + cartItem.getId() + " is not exists.");
-//        }
-//    }
-
     public CartItem addToCart(CartItem cartItem) {
         Optional<Product> productExist = productService.getProduct(cartItem.getProductId());
         if (productExist.isPresent()) {
@@ -81,7 +68,6 @@ public class CartService {
         }
     }
 
-
     public Boolean deleteCartItem(Long id) {
         List<CartItem> cartItems = getCart(id);
         if (!cartItems.isEmpty()) {
@@ -91,5 +77,4 @@ public class CartService {
             return false;
         }
     }
-
 }
