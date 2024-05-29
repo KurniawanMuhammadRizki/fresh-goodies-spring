@@ -41,7 +41,6 @@ public class CartController {
 
     @PostMapping
     public ResponseEntity<Response<CartItem>> addToCart(@Validated @RequestBody CartItem cartItem){
-       // var addCartItem = cartService.addToCart(cartItem);
         return Response.successfulResponse(HttpStatus.CREATED.value(), "Item added", cartService.addToCart(cartItem));
     }
 
@@ -54,6 +53,4 @@ public class CartController {
             return Response.failedResponse(HttpStatus.NOT_FOUND.value(), "Cart Item not found");
         }
     }
-
-
 }
