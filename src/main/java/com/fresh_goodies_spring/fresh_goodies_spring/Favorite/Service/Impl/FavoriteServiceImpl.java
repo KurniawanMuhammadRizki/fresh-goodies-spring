@@ -25,7 +25,7 @@ public class FavoriteServiceImpl implements FavoriteService{
     public List<Favorite> getFavorites(){
         return favorites;
     }
-
+    @Override
     public List<Product> getFavoriteProducts() {
         return favorites.stream()
                 .map(favorite -> productService.getProduct(favorite.getProductId())
