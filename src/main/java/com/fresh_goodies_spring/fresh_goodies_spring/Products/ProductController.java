@@ -22,7 +22,11 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<Response<List<Product>>> getProducts(){
-        return Response.successfulResponse("All product fetched", productService.getProducts());
+        List<Product> products = productService.getProducts();
+        if (products.isEmpty()) {
+           return Response.successfulResponse("Product Empty");
+        }
+        return Response.successfulResponse("All products fetched", products);
     }
 
     @GetMapping("/{id}")
