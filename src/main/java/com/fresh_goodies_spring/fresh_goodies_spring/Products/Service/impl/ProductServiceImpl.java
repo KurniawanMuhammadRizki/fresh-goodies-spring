@@ -4,6 +4,7 @@ import com.fresh_goodies_spring.fresh_goodies_spring.Products.Service.ProductSer
 import com.fresh_goodies_spring.fresh_goodies_spring.Products.model.Product;
 import com.fresh_goodies_spring.fresh_goodies_spring.exceptions.ApplicationException;
 import com.fresh_goodies_spring.fresh_goodies_spring.exceptions.DataNotFoundException;
+import com.fresh_goodies_spring.fresh_goodies_spring.exceptions.EmptyDataException;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> searchProducts(String query) {
         if (query == null || query.isEmpty()) {
+            if(products.isEmpty()){
+                throw new EmptyDataException(HttpStatus.OK, "Product Empty");
+            }
             return products;
         }
         return products.stream()
