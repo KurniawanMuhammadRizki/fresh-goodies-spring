@@ -17,4 +17,5 @@ public interface ProductService {
     public Product addProduct(Product product);
     public Product updateProduct(Product product);
     public Product deleteProduct(Long id);
+   public List<Product> searchProducts(String query);
 }
