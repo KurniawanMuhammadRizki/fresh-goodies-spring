@@ -11,5 +11,5 @@ public interface FavoriteService {
     List<Favorite> favorites = new ArrayList<>();
     public List<Favorite> getFavorites();
     public List<Product> getFavoriteProducts();
-    public boolean toogleFavorite(Favorite favorite);
+    public boolean toggleFavorite(Favorite favorite);
 }

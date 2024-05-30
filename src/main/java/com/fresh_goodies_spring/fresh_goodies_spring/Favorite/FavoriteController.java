@@ -3,12 +3,11 @@ package com.fresh_goodies_spring.fresh_goodies_spring.Favorite;
 import com.fresh_goodies_spring.fresh_goodies_spring.Favorite.Model.Favorite;
 import com.fresh_goodies_spring.fresh_goodies_spring.Favorite.Service.FavoriteService;
 import com.fresh_goodies_spring.fresh_goodies_spring.Products.model.Product;
+import com.fresh_goodies_spring.fresh_goodies_spring.exceptions.DataNotFoundException;
 import com.fresh_goodies_spring.fresh_goodies_spring.responses.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,9 +39,17 @@ public class FavoriteController {
         return Response.successfulResponse("Favorite products fetched successfully", favoriteProducts);
     }
 
-    @GetMapping
-    public ResponseEntity<Response<String>> toogleFavorites(){
-
+    @PostMapping("/toggle")
+    public ResponseEntity<Response<String>> toggleFavorite(@RequestBody Favorite favorite) {
+        try {
+            boolean isFavorite = favoriteService.toggleFavorite(favorite);
+            String message = isFavorite ? "Product added to favorites" : "Product removed from favorites";
+            return Response.successfulResponse(message, null);
+        } catch (DataNotFoundException ex) {
+            return Response.failedResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+        } catch (Exception ex) {
+            return Response.failedResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "An unexpected error occurred");
+        }
     }
 
 }

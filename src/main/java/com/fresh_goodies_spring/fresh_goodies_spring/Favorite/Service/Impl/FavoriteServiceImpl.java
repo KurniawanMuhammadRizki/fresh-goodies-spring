@@ -34,7 +34,7 @@ public class FavoriteServiceImpl implements FavoriteService{
                 .collect(Collectors.toList());
     }
     @Override
-    public boolean toogleFavorite(Favorite favorite){
+    public boolean toggleFavorite(Favorite favorite){
         Optional<Product> productExist = productService.getProduct(favorite.getProductId());
 
         if(productExist.isEmpty()){
