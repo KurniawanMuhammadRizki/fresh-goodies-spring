@@ -6,6 +6,8 @@ import lombok.ToString;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @ToString
@@ -14,6 +16,7 @@ public class Response<T> {
     private String message;
     private boolean success = false;
     private T data;
+    private LocalDateTime timestamp;
 
     public Response(int statCode, String statusDesc){
         statusCode = statCode;
@@ -22,6 +25,7 @@ public class Response<T> {
         if(statCode == HttpStatus.OK.value()){
             success = true;
         }
+        this.timestamp = LocalDateTime.now();
     }
 
     public static <T> ResponseEntity<Response<Object>> failedResponse(String message) {
