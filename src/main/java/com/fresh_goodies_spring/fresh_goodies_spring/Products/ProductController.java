@@ -20,11 +20,12 @@ public class ProductController {
         this.productService = productService;
     }
 
+
     @GetMapping
-    public ResponseEntity<Response<List<Product>>> getProducts(){
-        List<Product> products = productService.getProducts();
+    public ResponseEntity<Response<List<Product>>> getProducts(@RequestParam(value = "search", required = false) String search) {
+        List<Product> products = productService.searchProducts(search);
         if (products.isEmpty()) {
-           return Response.successfulResponse("Product Empty");
+            return Response.failedResponse(HttpStatus.NOT_FOUND.value(), "No products found matching the criteria");
         }
         return Response.successfulResponse("All products fetched", products);
     }
