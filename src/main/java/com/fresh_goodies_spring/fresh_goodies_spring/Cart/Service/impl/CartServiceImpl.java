@@ -5,6 +5,7 @@ import com.fresh_goodies_spring.fresh_goodies_spring.Cart.Service.CartService;
 import com.fresh_goodies_spring.fresh_goodies_spring.Products.Service.ProductService;
 import com.fresh_goodies_spring.fresh_goodies_spring.Products.model.Product;
 import com.fresh_goodies_spring.fresh_goodies_spring.exceptions.ApplicationException;
+import com.fresh_goodies_spring.fresh_goodies_spring.exceptions.DataNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class CartServiceImpl implements CartService {
                 return cartItem;
             }
         } else {
-            throw new ApplicationException("Product with ID " + cartItem.getProductId() + " does not exist.");
+           throw new DataNotFoundException("Product with ID " + cartItem.getProductId() + " does not exist.");
         }
     }
 
@@ -69,7 +70,7 @@ public class CartServiceImpl implements CartService {
             currentCartItem.setQuantity(cartItem.getQuantity());
             return currentCartItem;
         } else {
-            throw new NoSuchElementException("Cart Item with ID " + cartItem.getId() + " not found");
+            throw new DataNotFoundException("Cart Item with ID " + cartItem.getId() + " not found");
         }
     }
 
