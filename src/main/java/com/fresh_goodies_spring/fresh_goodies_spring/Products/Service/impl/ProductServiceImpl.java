@@ -59,13 +59,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Boolean deleteProduct(Long id){
+    public Product deleteProduct(Long id) {
         Optional<Product> productOptional = getProduct(id);
         if (productOptional.isPresent()) {
             products.remove(productOptional.get());
-            return true;
-        } else {
-            return false;
+            return productOptional.get();
         }
+        throw new DataNotFoundException("Product with ID " + id + " not found.");
     }
 }

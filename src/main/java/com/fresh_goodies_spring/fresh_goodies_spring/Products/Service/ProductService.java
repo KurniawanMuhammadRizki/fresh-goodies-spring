@@ -16,5 +16,5 @@ public interface ProductService {
     public Optional<Product> getProduct(long id);
     public Product addProduct(Product product);
     public Product updateProduct(Product product);
-    public Boolean deleteProduct(Long id);
+    public Product deleteProduct(Long id);
 }
