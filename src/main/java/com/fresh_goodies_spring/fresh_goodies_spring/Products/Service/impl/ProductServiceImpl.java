@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -23,6 +24,17 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getProducts(){
         return products;
+    }
+
+
+    @Override
+    public List<Product> searchProducts(String query) {
+        if (query == null || query.isEmpty()) {
+            return products;
+        }
+        return products.stream()
+                .filter(product -> product.getName().toLowerCase().contains(query.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
     @Override
