@@ -10,7 +10,6 @@ import lombok.*;
 @AllArgsConstructor
 public class Favorite {
     private long id;
-
     @NotNull
     private long productId;
 }
