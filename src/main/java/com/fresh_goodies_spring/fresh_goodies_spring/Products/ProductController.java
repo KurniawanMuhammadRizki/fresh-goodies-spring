@@ -39,7 +39,7 @@ public class ProductController {
     }
 
     @PutMapping
-    public ResponseEntity<Response<Product>> updateProduct(@RequestBody Product product){
+    public ResponseEntity<Response<Product>> updateProduct(@Validated @RequestBody Product product){
         return Response.successfulResponse("Update product success", productService.updateProduct(product));
     }
 

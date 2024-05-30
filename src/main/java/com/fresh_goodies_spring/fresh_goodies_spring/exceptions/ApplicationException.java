@@ -12,10 +12,10 @@ import java.util.List;
 @Setter
 @Data
 public class ApplicationException extends RuntimeException {
+
     private HttpStatus httpStatus;
     private List<String> errors;
     private Object data;
-
 
     public ApplicationException(String message) {
         this(HttpStatus.BAD_REQUEST, message);
