@@ -2,9 +2,11 @@ package com.fresh_goodies_spring.fresh_goodies_spring.Products.Service.impl;
 
 import com.fresh_goodies_spring.fresh_goodies_spring.Products.Service.ProductService;
 import com.fresh_goodies_spring.fresh_goodies_spring.Products.model.Product;
+import com.fresh_goodies_spring.fresh_goodies_spring.exceptions.ApplicationException;
 import com.fresh_goodies_spring.fresh_goodies_spring.exceptions.DataNotFoundException;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ public class ProductServiceImpl implements ProductService {
         if(exist.isPresent()){
             return exist;
         }
+        //throw  new ApplicationException(HttpStatus.NOT_FOUND, "Product with ID " + id + "not found");
         throw new DataNotFoundException("Product with ID " + id + " not found.");
     }
 
