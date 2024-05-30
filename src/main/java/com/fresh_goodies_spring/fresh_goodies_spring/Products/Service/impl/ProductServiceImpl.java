@@ -25,7 +25,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Optional<Product> getProduct(long id){
-        return products.stream().filter(product -> product.getId() == id).findFirst();
+        Optional<Product> exist = products.stream().filter(product -> product.getId() == id).findFirst();
+        if(exist.isPresent()){
+            return exist;
+        }
+        throw new DataNotFoundException("Product with ID " + id + " not found.");
     }
 
     @Override
