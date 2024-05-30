@@ -40,4 +40,9 @@ public class FavoriteController {
         return Response.successfulResponse("Favorite products fetched successfully", favoriteProducts);
     }
 
+    @GetMapping
+    public ResponseEntity<Response<String>> toogleFavorites(){
+
+    }
+
 }
