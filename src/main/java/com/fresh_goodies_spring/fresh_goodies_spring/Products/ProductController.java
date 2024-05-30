@@ -32,9 +32,6 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<Response<Optional<Product>>> getProduct(@PathVariable long id){
         var productFound = productService.getProduct(id);
-        if (productFound.isEmpty()){
-            return Response.failedResponse(HttpStatus.NOT_FOUND.value(), "Product not found");
-        }
         return Response.successfulResponse("Product detail found", productFound);
     }
 
